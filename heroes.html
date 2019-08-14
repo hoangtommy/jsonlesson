@@ -12,16 +12,45 @@
   <body>
 
       <header>
-
       </header>
 
       <section>
-
       </section>
 
     <script>
-    var header = document.querySelector('header');
-    var section = document.querySelector('section');
+      var header = document.querySelector('header');
+      var section = document.querySelector('section');
+
+      //set URL where JSON file is located
+      var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+      //Create a new request object instance
+      var request = new XMLHttpRequest();
+
+      //open request
+      request.open('GET', requestURL);
+
+      //expect json response from server and send request
+      request.responseType = 'json';
+      request.send();
+
+      request.onload = function() {
+        var superHeroes = request.response;
+        populateHeader(superHeroes);
+        showHeroes(superHeroes);
+      }
+
+      function populateHeader(jsonObj) {
+        var myH1 = document.createElement('h1');
+        myH1.textContent = jsonOBj['squadName'];
+        header.appendChild(myH1);
+
+        var myPara = document.createElement('p');
+        myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+        header.appendChild(myPara);
+      }
+
+      //didn't finish lesson on MDN due to relevance to issue
 
     </script>
   </body>
